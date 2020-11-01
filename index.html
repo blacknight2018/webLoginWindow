@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+        }
+
+        html, body {
+            height: 100%;
+            width: 100%;
+        }
+
+        body {
+            background-image: url("img.jpg");
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        .login_wrap {
+            height: 300px;
+            width: 400px;
+            border-radius: 2px;
+            /*border-width: 1px;*/
+            outline: none;
+            border: solid rgba(255,255,255,0.3) 1px;
+            position: absolute;
+            left: 50%;
+            top: 0;
+            margin-left: -200px;
+            transition: all 0.4s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .login_wrap {
+            right: 50%;
+        }
+
+        .username, .password {
+            outline: none;
+            border-style: solid;
+            border-radius: 4px;
+            border-color: #dcdfe6;
+            border-width: 1px;
+            height: 20px;
+            padding: 10px;
+        }
+
+        .username:focus, .password:focus {
+            border-color: #409eff;
+        }
+
+        .btn {
+            display: flex;
+            align-items: flex-end;
+        }
+
+        .btn_login {
+            width: 100px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #409eff;
+            color: white;
+            border-radius: 2px;
+            border: 1px solid transparent;
+
+        }
+
+        .btn_login:focus {
+            outline: none;
+
+        }
+
+        .btn_login:hover {
+            background-color: rgb(102, 177, 255);
+            cursor: pointer;
+        }
+
+        .btn_register {
+            background-color: transparent;
+            color: white;
+            outline: none;
+            border: none;
+        }
+
+        .btn_register:hover {
+            color: black;
+        }
+        .title{
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+<script>
+    function f() {
+        let obj = document.getElementById('login');
+        let parObj = obj.parentNode;
+        console.log(obj.offsetWidth, obj.offsetHeight)
+        setTimeout(() => {
+            let t = parObj.offsetHeight / 2 - (obj.offsetHeight / 2 * 2)
+            if(t <=0 )
+                t=50;
+            obj.style.top = t + "px";
+
+            setTimeout(() => {
+                //创建一个高斯模糊的div
+                let newObj = document.createElement("div");
+                newObj.style.position = "absolute";
+                newObj.style.left = obj.offsetLeft + "px";
+                newObj.style.top = obj.offsetTop + "px";
+                newObj.style.height = obj.offsetHeight + "px";
+                newObj.style.width = obj.offsetWidth + "px";
+                newObj.style.zIndex = "-1";
+
+                newObj.style.filter = "blur(2px)"
+                newObj.style.backgroundImage="url(\"img.jpg\")";
+                newObj.style.backgroundAttachment="fixed"
+                newObj.style.backgroundSize="cover"
+                document.getElementsByTagName("body")[0].appendChild(newObj)
+                console.log(newObj)
+            }, 300)
+
+
+        }, 100)
+
+
+    }
+
+    window.onload = () => {
+        f()
+    }
+</script>
+<div class="login_wrap" id="login">
+    <div class="title">
+        <p>Simple Login Window</p>
+    </div>
+    <br>
+    <div>
+        <input class="username" placeholder="学号" type="text">
+
+    </div>
+    <br>
+    <div>
+        <input class="password" placeholder="密码" type="password">
+    </div>
+    <br>
+    <div class="btn">
+        <button class="btn_login">登录</button>
+        <button class="btn_register">注册</button>
+    </div>
+</div>
+</body>
+</html>
